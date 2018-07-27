@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Scenes/Piece.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Art/Green Diamond 1.png" type="Texture" id=2]
+
+[node name="Teal Diamond" groups=[
+"Teal",
+] instance=ExtResource( 1 )]
+
+color = "Teal"
+
+[node name="Sprite" parent="." index="0"]
+
+position = Vector2( 0.5, 0.5 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 2 )
+_sections_unfolded = [ "Transform" ]
+
+
