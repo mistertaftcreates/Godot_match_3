@@ -1,0 +1,48 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://art/UI/Level Select Map 1.png" type="Texture" id=1]
+[ext_resource path="res://Scenes/LevelButton.tscn" type="PackedScene" id=2]
+
+[node name="LevelBackdrop" type="TextureRect"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 1
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+texture = ExtResource( 1 )
+stretch_mode = 0
+
+[node name="LevelButton" parent="." index="0" instance=ExtResource( 2 )]
+
+position = Vector2( 118.356, 325.742 )
+level = 1
+level_to_load = "res://Scenes/levels/level_1.tscn"
+enabled = false
+
+[node name="LevelButton2" parent="." index="1" instance=ExtResource( 2 )]
+
+position = Vector2( 292.225, 151.873 )
+level = 2
+
+[node name="LevelButton3" parent="." index="2" instance=ExtResource( 2 )]
+
+position = Vector2( 500.658, 149.778 )
+level = 3
+
+[node name="LevelButton4" parent="." index="3" instance=ExtResource( 2 )]
+
+position = Vector2( 476.567, 422.102 )
+level = 4
+
+[node name="LevelButton5" parent="." index="4" instance=ExtResource( 2 )]
+
+position = Vector2( 239.855, 438.861 )
+level = 5
+
+
