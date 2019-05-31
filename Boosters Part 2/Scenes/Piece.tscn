@@ -3,7 +3,7 @@
 [ext_resource path="res://Scripts/Piece.gd" type="Script" id=1]
 [ext_resource path="res://art/Pieces/Rainbow.png" type="Texture" id=2]
 
-[node name="piece" type="Node2D" index="0"]
+[node name="piece" type="Node2D"]
 
 script = ExtResource( 1 )
 _sections_unfolded = [ "Transform" ]

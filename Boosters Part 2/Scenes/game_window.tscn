@@ -20,7 +20,7 @@
 [ext_resource path="res://Scenes/Pause.tscn" type="PackedScene" id=18]
 [ext_resource path="res://Scripts/MusicPlayer.gd" type="Script" id=19]
 
-[node name="game_window" type="Node2D"]
+[node name="game_window" type="Node2D" index="0"]
 
 [node name="Camera2D" parent="." index="0" instance=ExtResource( 1 )]
 
@@ -168,13 +168,15 @@ goal_string = "ice"
 
 script = ExtResource( 19 )
 
+[connection signal="booster" from="CanvasLayer/bottom_ui" to="grid" method="_on_bottom_ui_booster"]
+
 [connection signal="pause_game" from="CanvasLayer/bottom_ui" to="Pause" method="_on_bottom_ui_pause_game"]
 
 [connection signal="camera_effect" from="grid" to="Camera2D" method="_on_grid_camera_effect"]
 
-[connection signal="check_goal" from="grid" to="CanvasLayer/top_ui" method="_on_grid_check_goal"]
-
 [connection signal="check_goal" from="grid" to="GoalHolder" method="_on_grid_check_goal"]
+
+[connection signal="check_goal" from="grid" to="CanvasLayer/top_ui" method="_on_grid_check_goal"]
 
 [connection signal="damage_concrete" from="grid" to="concrete_holder" method="_on_grid_damage_concrete"]
 
@@ -210,9 +212,9 @@ script = ExtResource( 19 )
 
 [connection signal="timeout" from="grid/HintTimer" to="grid" method="_on_HintTimer_timeout"]
 
-[connection signal="break_ice" from="ice_holder" to="CanvasLayer/top_ui" method="_on_ice_holder_break_ice"]
-
 [connection signal="break_ice" from="ice_holder" to="GoalHolder" method="_on_ice_holder_break_ice"]
+
+[connection signal="break_ice" from="ice_holder" to="CanvasLayer/top_ui" method="_on_ice_holder_break_ice"]
 
 [connection signal="remove_lock" from="lock_holder" to="grid" method="_on_lock_holder_remove_lock"]
 
