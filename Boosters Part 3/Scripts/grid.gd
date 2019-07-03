@@ -472,6 +472,7 @@ func destroy_matched():
 			if all_pieces[i][j] != null:
 				if all_pieces[i][j].matched:
 					emit_signal("check_goal", all_pieces[i][j].color)
+					
 					damage_special(i, j)
 					was_matched = true
 					all_pieces[i][j].queue_free()

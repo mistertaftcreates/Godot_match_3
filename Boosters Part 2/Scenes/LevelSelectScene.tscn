@@ -5,7 +5,7 @@
 [ext_resource path="res://Scenes/Level2Backdrop.tscn" type="PackedScene" id=3]
 [ext_resource path="res://art/UI/Quit Button.png" type="Texture" id=4]
 
-[node name="CanvasLayer" type="CanvasLayer"]
+[node name="CanvasLayer" type="CanvasLayer" index="0"]
 
 layer = 1
 offset = Vector2( 0, 0 )

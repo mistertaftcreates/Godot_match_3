@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://Scenes/Camera2D.tscn" type="PackedScene" id=1]
 [ext_resource path="res://art/background 2.png" type="Texture" id=2]
@@ -14,13 +14,11 @@
 [ext_resource path="res://Scripts/slime_holder.gd" type="Script" id=12]
 [ext_resource path="res://Scenes/Game Over Panel.tscn" type="PackedScene" id=13]
 [ext_resource path="res://Scripts/GoalHolder.gd" type="Script" id=14]
-[ext_resource path="res://Scenes/Goal.tscn" type="PackedScene" id=15]
-[ext_resource path="res://art/Obstacles/Ice.png" type="Texture" id=16]
-[ext_resource path="res://Scenes/Game Win Screen.tscn" type="PackedScene" id=17]
-[ext_resource path="res://Scenes/Pause.tscn" type="PackedScene" id=18]
-[ext_resource path="res://Scripts/MusicPlayer.gd" type="Script" id=19]
+[ext_resource path="res://Scenes/Game Win Screen.tscn" type="PackedScene" id=15]
+[ext_resource path="res://Scenes/Pause.tscn" type="PackedScene" id=16]
+[ext_resource path="res://Scripts/MusicPlayer.gd" type="Script" id=17]
 
-[node name="game_window" type="Node2D" index="0"]
+[node name="game_window" type="Node2D"]
 
 [node name="Camera2D" parent="." index="0" instance=ExtResource( 1 )]
 
@@ -55,6 +53,7 @@ stretch_mode = 0
 margin_right = 576.0
 margin_bottom = 192.0
 goal_prefab = ExtResource( 4 )
+current_level = null
 
 [node name="bottom_ui" parent="CanvasLayer" index="2" instance=ExtResource( 5 )]
 
@@ -151,22 +150,17 @@ autostart = false
 
 [node name="GoalHolder" type="Node" parent="." index="11"]
 
-editor/display_folded = true
 script = ExtResource( 14 )
 
-[node name="Goal" parent="GoalHolder" index="0" instance=ExtResource( 15 )]
+[node name="Game Win Screen" parent="." index="12" instance=ExtResource( 15 )]
 
-goal_texture = ExtResource( 16 )
-max_needed = 22
-goal_string = "ice"
-
-[node name="Game Win Screen" parent="." index="12" instance=ExtResource( 17 )]
-
-[node name="Pause" parent="." index="13" instance=ExtResource( 18 )]
+[node name="Pause" parent="." index="13" instance=ExtResource( 16 )]
 
 [node name="MusicPlayer" type="Node" parent="." index="14"]
 
-script = ExtResource( 19 )
+script = ExtResource( 17 )
+
+[connection signal="notify_of_level" from="CanvasLayer/top_ui" to="GoalHolder" method="_on_top_ui_notify_of_level"]
 
 [connection signal="booster" from="CanvasLayer/bottom_ui" to="grid" method="_on_bottom_ui_booster"]
 
