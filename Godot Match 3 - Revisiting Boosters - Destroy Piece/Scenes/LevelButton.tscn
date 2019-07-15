@@ -1,0 +1,86 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://Scripts/LevelButton.gd" type="Script" id=1]
+[ext_resource path="res://art/UI/Red Button.png" type="Texture" id=2]
+[ext_resource path="res://art/UI/Green Button 2.png" type="Texture" id=3]
+[ext_resource path="res://art/UI/Star Filled.png" type="Texture" id=4]
+[ext_resource path="res://art/UI/Star Blank.png" type="Texture" id=5]
+[ext_resource path="res://Fonts/Kenney Blocks.ttf" type="DynamicFontData" id=6]
+
+[sub_resource type="DynamicFont" id=1]
+
+size = 50
+use_mipmaps = false
+use_filter = false
+font_data = ExtResource( 6 )
+_sections_unfolded = [ "Font", "Settings" ]
+
+[node name="LevelButton" type="Node2D"]
+
+script = ExtResource( 1 )
+level = null
+level_to_load = null
+enabled = null
+score_goal_met = null
+blocked_texture = ExtResource( 2 )
+open_texture = ExtResource( 3 )
+goal_met = ExtResource( 4 )
+goal_not_met = ExtResource( 5 )
+
+[node name="TextureButton" type="TextureButton" parent="." index="0"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = -48.0
+margin_top = -49.0
+margin_right = 49.0
+margin_bottom = 48.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+focus_mode = 2
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+group = null
+texture_normal = ExtResource( 2 )
+_sections_unfolded = [ "Margin", "Textures" ]
+
+[node name="Label" type="Label" parent="TextureButton" index="0"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 21.0
+margin_right = 83.0
+margin_bottom = 76.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 4
+custom_fonts/font = SubResource( 1 )
+text = "1"
+align = 1
+valign = 1
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+_sections_unfolded = [ "Margin", "custom_fonts" ]
+
+[node name="Sprite" type="Sprite" parent="." index="1"]
+
+position = Vector2( 0, 72 )
+texture = ExtResource( 5 )
+_sections_unfolded = [ "Transform" ]
+
+[connection signal="pressed" from="TextureButton" to="." method="_on_TextureButton_pressed"]
+
+

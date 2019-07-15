@@ -1,0 +1,87 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://Scripts/LevelSelectScene.gd" type="Script" id=1]
+[ext_resource path="res://Scenes/LevelBackdrop.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Scenes/Level2Backdrop.tscn" type="PackedScene" id=3]
+[ext_resource path="res://art/UI/Quit Button.png" type="Texture" id=4]
+[ext_resource path="res://art/Godot match 3 heart.png" type="Texture" id=5]
+[ext_resource path="res://Scripts/Heart.gd" type="Script" id=6]
+[ext_resource path="res://Fonts/Kenney Blocks.ttf" type="DynamicFontData" id=7]
+[ext_resource path="res://Fonts/Kenney Mini Square.ttf" type="DynamicFontData" id=8]
+
+[sub_resource type="DynamicFont" id=1]
+size = 32
+font_data = ExtResource( 7 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 26
+font_data = ExtResource( 8 )
+
+[node name="CanvasLayer" type="CanvasLayer"]
+script = ExtResource( 1 )
+
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
+margin_right = 576.0
+margin_bottom = 1024.0
+scroll_horizontal_enabled = false
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer"]
+margin_right = 576.0
+margin_bottom = 4096.0
+custom_constants/separation = 0
+
+[node name="LevelBackdrop" parent="ScrollContainer/VBoxContainer" instance=ExtResource( 2 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 576.0
+margin_bottom = 2048.0
+
+[node name="Level2Backdrop" parent="ScrollContainer/VBoxContainer" instance=ExtResource( 3 )]
+editor/display_folded = true
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 2048.0
+margin_right = 576.0
+margin_bottom = 4096.0
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 2
+
+[node name="QuitButton" type="TextureButton" parent="CanvasLayer"]
+margin_right = 64.0
+margin_bottom = 64.0
+rect_min_size = Vector2( 64, 64 )
+texture_normal = ExtResource( 4 )
+expand = true
+stretch_mode = 5
+
+[node name="Heart" type="TextureRect" parent="CanvasLayer"]
+margin_left = 450.0
+margin_right = 576.0
+margin_bottom = 128.0
+texture = ExtResource( 5 )
+expand = true
+script = ExtResource( 6 )
+
+[node name="LivesTimer" type="Timer" parent="CanvasLayer/Heart"]
+
+[node name="LivesNumber" type="Label" parent="CanvasLayer/Heart"]
+margin_left = 40.9949
+margin_top = 26.876
+margin_right = 85.9949
+margin_bottom = 74.876
+custom_fonts/font = SubResource( 1 )
+text = "5"
+align = 1
+valign = 1
+
+[node name="LivesTimerLabel" type="Label" parent="CanvasLayer/Heart"]
+margin_left = 26.6328
+margin_top = 67.0909
+margin_right = 97.6328
+margin_bottom = 100.091
+custom_fonts/font = SubResource( 2 )
+text = "15:00"
+align = 1
+valign = 1
+[connection signal="pressed" from="CanvasLayer/QuitButton" to="." method="_on_TextureButton_pressed"]
