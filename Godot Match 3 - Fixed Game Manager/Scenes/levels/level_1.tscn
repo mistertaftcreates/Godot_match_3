@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Scenes/game_window.tscn" type="PackedScene" id=1]
+[ext_resource path="res://art/Pieces/Blue Piece.png" type="Texture" id=2]
+
+[node name="level_1" instance=ExtResource( 1 )]
+
+[node name="top_ui" parent="CanvasLayer" index="1"]
+current_level = 1
+
+[node name="grid" parent="." index="2"]
+editor/display_folded = false
+width = 6
+height = 6
+possible_pieces = PoolStringArray( "res://Scenes/blue_piece.tscn", "res://Scenes/green_piece.tscn", "res://Scenes/light_green_piece.tscn", "res://Scenes/orange_piece.tscn" )
+max_score = 20
+current_counter_value = 40
+
+[node name="Goal" parent="GoalHolder" index="0"]
+goal_texture = ExtResource( 2 )
+max_needed = 6
