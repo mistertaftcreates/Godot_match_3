@@ -1,0 +1,159 @@
+[gd_scene load_steps=15 format=2]
+
+[ext_resource path="res://Scripts/GameManager.gd" type="Script" id=1]
+[ext_resource path="res://Scenes/Camera2D.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Scripts/ice_holder.gd" type="Script" id=3]
+[ext_resource path="res://art/background 2.png" type="Texture" id=4]
+[ext_resource path="res://Scenes/top_ui.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Scenes/GoalPrefab.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Scenes/bottom_ui.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Scripts/grid.gd" type="Script" id=8]
+[ext_resource path="res://Scenes/HintEffect.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Scenes/Sinker.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Scenes/Game Over Panel.tscn" type="PackedScene" id=11]
+[ext_resource path="res://Scenes/Game Win Screen.tscn" type="PackedScene" id=12]
+[ext_resource path="res://Scenes/Pause.tscn" type="PackedScene" id=13]
+[ext_resource path="res://Scripts/MusicPlayer.gd" type="Script" id=14]
+
+[node name="game_window" type="Node2D"]
+
+[node name="GameManager" type="Node2D" parent="."]
+pause_mode = 1
+editor/display_folded = true
+script = ExtResource( 1 )
+width = 8
+height = 10
+level = 1
+is_moves = true
+max_counter = 200
+max_score = 1000
+points_per_piece = 15
+
+[node name="MoveTimer" type="Timer" parent="GameManager"]
+
+[node name="Goals" type="Node" parent="GameManager"]
+
+[node name="Camera2D" parent="." instance=ExtResource( 2 )]
+
+[node name="ObstacleHolder" type="Node" parent="."]
+editor/display_folded = true
+
+[node name="ice_holder" type="Node2D" parent="ObstacleHolder"]
+script = ExtResource( 3 )
+obstacle = "res://Scenes/ice.tscn"
+damage_under = true
+value = "ice"
+
+[node name="lock_holder" type="Node2D" parent="ObstacleHolder"]
+script = ExtResource( 3 )
+obstacle = "res://Scenes/licorice.tscn"
+damage_under = true
+value = "lock"
+
+[node name="concrete_holder" type="Node2D" parent="ObstacleHolder"]
+script = ExtResource( 3 )
+obstacle = "res://Scenes/concrete.tscn"
+damage_adjacent = true
+value = "concrete"
+
+[node name="slime_holder" type="Node2D" parent="ObstacleHolder"]
+script = ExtResource( 3 )
+obstacle = "res://Scenes/slime.tscn"
+damage_adjacent = true
+value = "slime"
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+editor/display_folded = true
+layer = -1
+
+[node name="background" type="TextureRect" parent="CanvasLayer"]
+margin_top = 7.0
+margin_right = 576.0
+margin_bottom = 1031.0
+texture = ExtResource( 4 )
+
+[node name="top_ui" parent="CanvasLayer" instance=ExtResource( 5 )]
+margin_right = 576.0
+margin_bottom = 192.0
+goal_prefab = ExtResource( 6 )
+
+[node name="bottom_ui" parent="CanvasLayer" instance=ExtResource( 7 )]
+margin_top = 941.0
+margin_bottom = 1033.0
+
+[node name="grid" type="Node2D" parent="."]
+editor/display_folded = true
+script = ExtResource( 8 )
+x_start = 64
+y_start = 800
+offset = 64
+y_offset = 2
+possible_pieces = PoolStringArray( "res://Scenes/blue_piece.tscn", "res://Scenes/green_piece.tscn", "res://Scenes/light_green_piece.tscn", "res://Scenes/orange_piece.tscn", "res://Scenes/yellow_piece.tscn" )
+hint_effect = ExtResource( 9 )
+sinker_piece = ExtResource( 10 )
+
+[node name="ShuffleTimer" type="Timer" parent="grid"]
+wait_time = 0.5
+one_shot = true
+
+[node name="HintTimer" type="Timer" parent="grid"]
+wait_time = 3.0
+one_shot = true
+
+[node name="destroy_timer" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+
+[node name="collapse_timer" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+
+[node name="refill_timer" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+
+[node name="Game Over Panel" parent="." instance=ExtResource( 11 )]
+pause_mode = 2
+
+[node name="Game Win Screen" parent="." instance=ExtResource( 12 )]
+pause_mode = 2
+
+[node name="Pause" parent="." instance=ExtResource( 13 )]
+
+[node name="MusicPlayer" type="Node" parent="."]
+script = ExtResource( 14 )
+[connection signal="check_goal" from="GameManager" to="CanvasLayer/top_ui" method="_on_GameManager_check_goal"]
+[connection signal="color_bomb" from="GameManager" to="grid" method="_on_GameManager_color_bomb"]
+[connection signal="create_goal" from="GameManager" to="CanvasLayer/top_ui" method="_on_GameManager_create_goal"]
+[connection signal="destroy_piece" from="GameManager" to="grid" method="_on_GameManager_destroy_piece"]
+[connection signal="game_lost" from="GameManager" to="grid" method="_on_GameManager_game_lost"]
+[connection signal="game_lost" from="GameManager" to="Game Over Panel" method="_on_GameManager_game_lost"]
+[connection signal="game_won" from="GameManager" to="grid" method="_on_GameManager_game_won"]
+[connection signal="game_won" from="GameManager" to="Game Win Screen" method="_on_GameManager_game_won"]
+[connection signal="set_counter_info" from="GameManager" to="CanvasLayer/top_ui" method="_on_GameManager_set_counter_info"]
+[connection signal="set_dimensions" from="GameManager" to="grid" method="_on_GameManager_set_dimensions"]
+[connection signal="set_score_info" from="GameManager" to="CanvasLayer/top_ui" method="_on_GameManager_set_score_info"]
+[connection signal="timeout" from="GameManager/MoveTimer" to="GameManager" method="_on_MoveTimer_timeout"]
+[connection signal="destroy_piece" from="ObstacleHolder/concrete_holder" to="grid" method="_on_concrete_holder_destroy_piece"]
+[connection signal="destroy_piece" from="ObstacleHolder/slime_holder" to="grid" method="_on_slime_holder_destroy_piece"]
+[connection signal="booster" from="CanvasLayer/bottom_ui" to="GameManager" method="_on_bottom_ui_booster"]
+[connection signal="pause_game" from="CanvasLayer/bottom_ui" to="Pause" method="_on_bottom_ui_pause_game"]
+[connection signal="camera_effect" from="grid" to="Camera2D" method="_on_grid_camera_effect"]
+[connection signal="check_goal" from="grid" to="GameManager" method="_on_grid_check_goal"]
+[connection signal="damage_obstacle" from="grid" to="ObstacleHolder/slime_holder" method="_on_grid_damage_obstacle"]
+[connection signal="damage_obstacle" from="grid" to="ObstacleHolder/ice_holder" method="_on_grid_damage_obstacle"]
+[connection signal="damage_obstacle" from="grid" to="ObstacleHolder/lock_holder" method="_on_grid_damage_obstacle"]
+[connection signal="damage_obstacle" from="grid" to="ObstacleHolder/concrete_holder" method="_on_grid_damage_obstacle"]
+[connection signal="make_obstacle" from="grid" to="ObstacleHolder/slime_holder" method="_on_grid_make_obstacle"]
+[connection signal="make_obstacle" from="grid" to="ObstacleHolder/ice_holder" method="_on_grid_make_obstacle"]
+[connection signal="make_obstacle" from="grid" to="ObstacleHolder/lock_holder" method="_on_grid_make_obstacle"]
+[connection signal="make_obstacle" from="grid" to="ObstacleHolder/concrete_holder" method="_on_grid_make_obstacle"]
+[connection signal="place_camera" from="grid" to="Camera2D" method="_on_grid_place_camera"]
+[connection signal="play_sound" from="grid" to="MusicPlayer" method="_on_grid_play_sound"]
+[connection signal="update_counter" from="grid" to="GameManager" method="_on_grid_update_counter"]
+[connection signal="update_score" from="grid" to="GameManager" method="_on_grid_update_score"]
+[connection signal="timeout" from="grid/ShuffleTimer" to="grid" method="_on_ShuffleTimer_timeout"]
+[connection signal="timeout" from="grid/HintTimer" to="grid" method="_on_HintTimer_timeout"]
+[connection signal="timeout" from="destroy_timer" to="grid" method="_on_destroy_timer_timeout"]
+[connection signal="timeout" from="collapse_timer" to="grid" method="_on_collapse_timer_timeout"]
+[connection signal="timeout" from="refill_timer" to="grid" method="_on_refill_timer_timeout"]
