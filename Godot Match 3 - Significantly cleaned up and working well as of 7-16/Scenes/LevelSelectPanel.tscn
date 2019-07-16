@@ -1,0 +1,70 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://Scenes/BaseMenuPanel.tscn" type="PackedScene" id=1]
+[ext_resource path="res://LevelSelectPanel.gd" type="Script" id=2]
+[ext_resource path="res://art/More UI/Level Select Panel Revised.png" type="Texture" id=3]
+[ext_resource path="res://art/More UI/Go Button.png" type="Texture" id=4]
+[ext_resource path="res://art/More UI/Back Button.png" type="Texture" id=5]
+[ext_resource path="res://Fonts/Kenney Blocks.ttf" type="DynamicFontData" id=6]
+
+[sub_resource type="DynamicFont" id=1]
+size = 52
+font_data = ExtResource( 6 )
+
+[node name="LevelSelectPanel" instance=ExtResource( 1 )]
+script = ExtResource( 2 )
+
+[node name="MarginContainer" parent="." index="0"]
+margin_right = 40.0
+margin_bottom = 86.0
+
+[node name="Graphic and Buttons" parent="MarginContainer" index="0"]
+margin_right = 596.0
+margin_bottom = 1090.0
+alignment = 1
+
+[node name="Graphic" parent="MarginContainer/Graphic and Buttons" index="0"]
+margin_right = 576.0
+margin_bottom = 1020.0
+texture = ExtResource( 3 )
+
+[node name="ButtonContainer" type="HBoxContainer" parent="MarginContainer/Graphic and Buttons/Graphic" index="0"]
+margin_left = 72.0
+margin_top = 524.0
+margin_right = 514.0
+margin_bottom = 635.0
+custom_constants/separation = 40
+
+[node name="GoButton" type="TextureButton" parent="MarginContainer/Graphic and Buttons/Graphic/ButtonContainer" index="0"]
+margin_right = 201.0
+margin_bottom = 145.0
+texture_normal = ExtResource( 4 )
+
+[node name="BackButton" type="TextureButton" parent="MarginContainer/Graphic and Buttons/Graphic/ButtonContainer" index="1"]
+margin_left = 241.0
+margin_right = 442.0
+margin_bottom = 145.0
+texture_normal = ExtResource( 5 )
+
+[node name="HighScoreLabel" type="Label" parent="MarginContainer/Graphic and Buttons/Graphic" index="1"]
+margin_left = 300.0
+margin_top = 342.0
+margin_right = 512.0
+margin_bottom = 420.0
+custom_fonts/font = SubResource( 1 )
+text = "0000"
+align = 1
+valign = 1
+
+[node name="Buttons" parent="MarginContainer/Graphic and Buttons" index="1"]
+margin_top = 1050.0
+margin_right = 576.0
+margin_bottom = 1070.0
+
+[node name="Button 1" parent="MarginContainer/Graphic and Buttons/Buttons" index="0"]
+margin_right = 576.0
+
+[node name="Button 2" parent="MarginContainer/Graphic and Buttons/Buttons" index="1"]
+margin_right = 576.0
+[connection signal="pressed" from="MarginContainer/Graphic and Buttons/Graphic/ButtonContainer/GoButton" to="." method="_on_GoButton_pressed"]
+[connection signal="pressed" from="MarginContainer/Graphic and Buttons/Graphic/ButtonContainer/BackButton" to="." method="_on_BackButton_pressed"]
