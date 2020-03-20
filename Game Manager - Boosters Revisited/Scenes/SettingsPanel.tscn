@@ -1,0 +1,57 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://Scenes/BaseMenuPanel.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Scenes/SettingsPanel.gd" type="Script" id=2]
+[ext_resource path="res://art/Sound On Button.png" type="Texture" id=3]
+[ext_resource path="res://art/Sound Off Button.png" type="Texture" id=4]
+[ext_resource path="res://art/godot match 3 settings bar.png" type="Texture" id=5]
+[ext_resource path="res://art/Back Button.png" type="Texture" id=6]
+
+[node name="Settings" instance=ExtResource( 1 )]
+
+script = ExtResource( 2 )
+sound_on = ExtResource( 3 )
+sound_off = ExtResource( 4 )
+
+[node name="MarginContainer" parent="." index="0"]
+
+editor/display_folded = false
+
+[node name="Graphic" parent="MarginContainer/Graphic and Buttons" index="0"]
+
+margin_bottom = 488.0
+rect_min_size = Vector2( 488, 488 )
+texture = ExtResource( 5 )
+expand = true
+_sections_unfolded = [ "Rect" ]
+
+[node name="Buttons" parent="MarginContainer/Graphic and Buttons" index="1"]
+
+editor/display_folded = false
+margin_top = 518.0
+margin_bottom = 922.0
+
+[node name="Button 1" parent="MarginContainer/Graphic and Buttons/Buttons" index="0"]
+
+margin_bottom = 256.0
+rect_min_size = Vector2( 512, 256 )
+texture_normal = ExtResource( 3 )
+expand = true
+stretch_mode = 5
+_sections_unfolded = [ "Rect", "Textures" ]
+
+[node name="Button 2" parent="MarginContainer/Graphic and Buttons/Buttons" index="1"]
+
+margin_top = 276.0
+margin_bottom = 404.0
+rect_min_size = Vector2( 512, 128 )
+texture_normal = ExtResource( 6 )
+expand = true
+stretch_mode = 5
+_sections_unfolded = [ "Rect", "Textures" ]
+
+[connection signal="pressed" from="MarginContainer/Graphic and Buttons/Buttons/Button 1" to="." method="_on_Button_1_pressed"]
+
+[connection signal="pressed" from="MarginContainer/Graphic and Buttons/Buttons/Button 2" to="." method="_on_Button_2_pressed"]
+
+

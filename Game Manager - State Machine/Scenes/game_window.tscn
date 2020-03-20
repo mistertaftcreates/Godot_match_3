@@ -124,6 +124,7 @@ script = ExtResource( 19 )
 [connection signal="booster" from="CanvasLayer/bottom_ui" to="grid" method="_on_bottom_ui_booster"]
 [connection signal="pause_game" from="CanvasLayer/bottom_ui" to="Pause" method="_on_bottom_ui_pause_game"]
 [connection signal="camera_effect" from="grid" to="Camera2D" method="_on_grid_camera_effect"]
+[connection signal="change_move_state" from="grid" to="GameManager" method="_on_grid_change_move_state"]
 [connection signal="check_goal" from="grid" to="GameManager" method="_on_grid_check_goal"]
 [connection signal="check_goal" from="grid" to="CanvasLayer/top_ui" method="_on_grid_check_goal"]
 [connection signal="damage_concrete" from="grid" to="concrete_holder" method="_on_grid_damage_concrete"]

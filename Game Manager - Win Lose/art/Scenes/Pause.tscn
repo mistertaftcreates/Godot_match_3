@@ -1,0 +1,62 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Scripts/Pause.gd" type="Script" id=1]
+[ext_resource path="res://art/UI/Pause Panel.png" type="Texture" id=2]
+[ext_resource path="res://art/UI/Quit Button Pause.png" type="Texture" id=3]
+[ext_resource path="res://art/UI/Continue Button Pause.png" type="Texture" id=4]
+[ext_resource path="res://Animation/slide_in.tres" type="Animation" id=5]
+
+[node name="Pause" type="CanvasLayer"]
+pause_mode = 2
+offset = Vector2( 576, 0 )
+transform = Transform2D( 1, 0, 0, 1, 576, 0 )
+script = ExtResource( 1 )
+main_level_name = "res://Scenes/Game Menu.tscn"
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+editor/display_folded = true
+margin_right = 8.0
+margin_bottom = 40.0
+custom_constants/margin_right = 32
+custom_constants/margin_top = 384
+custom_constants/margin_left = 32
+custom_constants/margin_bottom = 896
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer"]
+editor/display_folded = true
+margin_left = 32.0
+margin_top = 384.0
+margin_right = 544.0
+margin_bottom = 870.0
+texture = ExtResource( 2 )
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/TextureRect"]
+margin_left = 36.0
+margin_top = 236.0
+margin_right = 476.0
+margin_bottom = 419.0
+custom_constants/separation = 40
+alignment = 1
+
+[node name="Quit" type="TextureButton" parent="MarginContainer/TextureRect/HBoxContainer"]
+margin_left = 8.0
+margin_right = 200.0
+margin_bottom = 183.0
+rect_min_size = Vector2( 192, 100 )
+texture_normal = ExtResource( 3 )
+expand = true
+stretch_mode = 5
+
+[node name="Continue" type="TextureButton" parent="MarginContainer/TextureRect/HBoxContainer"]
+margin_left = 240.0
+margin_right = 432.0
+margin_bottom = 183.0
+rect_min_size = Vector2( 192, 100 )
+texture_normal = ExtResource( 4 )
+expand = true
+stretch_mode = 5
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/slide_in = ExtResource( 5 )
+[connection signal="pressed" from="MarginContainer/TextureRect/HBoxContainer/Quit" to="." method="_on_Quit_pressed"]
+[connection signal="pressed" from="MarginContainer/TextureRect/HBoxContainer/Continue" to="." method="_on_Continue_pressed"]

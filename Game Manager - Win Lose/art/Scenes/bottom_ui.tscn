@@ -1,0 +1,100 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://art/Bottom UI v 2.png" type="Texture" id=1]
+[ext_resource path="res://Scripts/bottom_ui.gd" type="Script" id=2]
+[ext_resource path="res://Scripts/BoosterManager.gd" type="Script" id=3]
+[ext_resource path="res://art/UI/Pause Button.png" type="Texture" id=4]
+[ext_resource path="res://art/UI/Make Color Bomb Button.png" type="Texture" id=5]
+[ext_resource path="res://Scripts/Booster.gd" type="Script" id=6]
+[ext_resource path="res://art/UI/Plus Ten Seconds Button.png" type="Texture" id=7]
+[ext_resource path="res://art/UI/Mallet Button.png" type="Texture" id=8]
+
+[node name="bottom_ui" type="TextureRect"]
+margin_top = 932.0
+margin_right = 576.0
+margin_bottom = 1024.0
+texture = ExtResource( 1 )
+script = ExtResource( 2 )
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+margin_left = 20.0
+margin_right = 557.0
+margin_bottom = 64.0
+custom_constants/margin_right = 0
+custom_constants/margin_top = -50
+custom_constants/margin_left = 0
+custom_constants/margin_bottom = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+margin_top = -50.0
+margin_right = 537.0
+margin_bottom = 64.0
+size_flags_horizontal = 3
+custom_constants/separation = 36
+alignment = 1
+script = ExtResource( 3 )
+
+[node name="Pause" type="TextureButton" parent="MarginContainer/HBoxContainer"]
+margin_right = 107.0
+margin_bottom = 114.0
+rect_min_size = Vector2( 100, 100 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture_normal = ExtResource( 4 )
+expand = true
+stretch_mode = 5
+
+[node name="Booster1" type="TextureButton" parent="MarginContainer/HBoxContainer" groups=[
+"Boosters",
+]]
+margin_left = 143.0
+margin_right = 250.0
+margin_bottom = 114.0
+rect_min_size = Vector2( 100, 100 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture_normal = ExtResource( 5 )
+expand = true
+stretch_mode = 5
+script = ExtResource( 6 )
+add_to_counter_texture = ExtResource( 7 )
+make_color_bomb_texture = ExtResource( 5 )
+destroy_piece_texture = ExtResource( 8 )
+
+[node name="Booster2" type="TextureButton" parent="MarginContainer/HBoxContainer" groups=[
+"Boosters",
+]]
+margin_left = 286.0
+margin_right = 393.0
+margin_bottom = 114.0
+rect_min_size = Vector2( 100, 100 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture_normal = ExtResource( 8 )
+expand = true
+stretch_mode = 5
+script = ExtResource( 6 )
+add_to_counter_texture = ExtResource( 7 )
+make_color_bomb_texture = ExtResource( 5 )
+destroy_piece_texture = ExtResource( 8 )
+
+[node name="Booster3" type="TextureButton" parent="MarginContainer/HBoxContainer" groups=[
+"Boosters",
+]]
+margin_left = 429.0
+margin_right = 537.0
+margin_bottom = 114.0
+rect_min_size = Vector2( 100, 100 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture_normal = ExtResource( 7 )
+expand = true
+stretch_mode = 5
+script = ExtResource( 6 )
+add_to_counter_texture = ExtResource( 7 )
+make_color_bomb_texture = ExtResource( 5 )
+destroy_piece_texture = ExtResource( 8 )
+[connection signal="pressed" from="MarginContainer/HBoxContainer/Pause" to="." method="_on_Pause_pressed"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/Booster1" to="." method="_on_Booster1_pressed"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/Booster2" to="." method="_on_Booster2_pressed"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/Booster3" to="." method="_on_Booster3_pressed"]
